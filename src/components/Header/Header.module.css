@@ -1,0 +1,12 @@
+.wrapper {
+  background-color: #0d0d0d;
+  display: table;
+  text-align: center;
+  width: 100%;
+  height: 20rem;
+}
+
+.wrapper > div {
+  display: table-cell;
+  vertical-align: middle;
+}

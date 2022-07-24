@@ -1,0 +1,33 @@
+.InputContent{
+    display: flex; 
+    gap: 0.8rem; 
+    width: 73.6rem;
+    margin: -2.4rem auto;
+
+}
+.InputContent input{
+    all: unset;
+    padding: 1.6rem;
+    width: 63.8rem;
+    background-color: var(--gray-500);
+    color: var(--gray-300);
+    border-radius: 8px;
+}
+
+input:focus-within{
+    color: var(--gray-100);
+}
+
+.InputContent button{
+    all: unset;
+    padding: 1.6rem;
+    text-align: center;
+    display: flex;
+    gap: 0.8rem;
+    background-color: var(--blue-dark);
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--gray-100);
+    border-radius: 8px;
+    font-size: 1.4rem;
+}
