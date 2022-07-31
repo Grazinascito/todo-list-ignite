@@ -3,7 +3,7 @@ import { useState, FormEvent, ChangeEvent } from "react";
 import { TodoList } from "../TodoList/TodoList";
 import { PlusCircle } from "phosphor-react";
 
-interface inputProps {
+interface InputProps {
   name: string;
   id: number;
   isChecked: boolean;
@@ -11,7 +11,7 @@ interface inputProps {
 
 export const InputForm = () => {
   const [inputValue, setInputValue] = useState("");
-  const [taskValue, setTaskValue] = useState<Array<inputProps>>([]);
+  const [taskValue, setTaskValue] = useState<Array<InputProps>>([]);
 
   const handleInputValue = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);

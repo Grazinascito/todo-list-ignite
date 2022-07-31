@@ -17,8 +17,15 @@
 .listContentStatus p:last-child {
   color: #8284fa;
 }
+.listContentStatus p span:last-child {
+  background-color: var(--gray-400);
+  color: white;
+  border-radius: 999px;
+  padding: 0.2rem 0.8rem;
+  margin-left: 0.8rem;
+}
 
-.listContentStatus p > span {
+.listContentStatus p:first-child > span {
   color: white;
   background-color: var(--gray-400);
   padding: 0.5rem 0.8rem;
