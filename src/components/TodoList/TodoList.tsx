@@ -2,38 +2,40 @@ import styles from "./TodoList.module.css";
 import clipboardIcon from "../../assets/Clipboard.svg";
 import uncheckIcon from "../../assets/uncheck.svg";
 import checkedIcon from "../../assets/checked.svg";
-import deleteIcon from "../../assets/deleteIcon.svg";
 import { useEffect, useState } from "react";
+import { Trash } from "phosphor-react";
 
 interface TodoListProps {
-  finalValue: {
+  taskValue: {
     name: string;
     id: number;
     isChecked: boolean;
   }[];
-  finalValueLength: number;
-  setFinalValue: Function;
+  taskValueLength: number;
+  setTaskValue: Function;
 }
+
 export const TodoList = ({
-  finalValue,
-  finalValueLength,
-  setFinalValue,
+  taskValue,
+  taskValueLength,
+  setTaskValue,
 }: TodoListProps) => {
   const [isCompleted, setIsCompleted] = useState(0);
+
   const handleIsChecked = (id: number) => {
-    const mappedList = finalValue.map((value) => {
-      if (value.id === id) {
-        return { ...value, isChecked: !value.isChecked };
+    const mappedList = taskValue.map((task) => {
+      if (task.id === id) {
+        return { ...task, isChecked: !task.isChecked };
       } else {
-        return value;
+        return task;
       }
     });
 
-    setFinalValue(mappedList);
+    setTaskValue(mappedList);
   };
 
   const handleAmountOfChecked = () => {
-    const filterCompleted = finalValue.filter((task) => {
+    const filterCompleted = taskValue.filter((task) => {
       if (task.isChecked) {
         return task;
       }
@@ -44,52 +46,63 @@ export const TodoList = ({
 
   useEffect(() => {
     handleAmountOfChecked();
-  }, [finalValue]);
+  }, [taskValue]);
 
   const handleDeleteTask = (id: number) => {
-    const taskWithoutDeletedOne = finalValue.filter((task) => {
+    const taskWithoutDeletedOne = taskValue.filter((task) => {
       if (task.id !== id) {
         return task;
       }
     });
 
-    setFinalValue(taskWithoutDeletedOne);
+    setTaskValue(taskWithoutDeletedOne);
   };
 
   return (
     <div className={styles.listContent}>
       <div className={styles.listContentStatus}>
         <p>
-          Tarefas criadas <span>{finalValueLength}</span>
+          Tarefas criadas <span>{taskValueLength}</span>
         </p>
         <p>
-          Concluídas <span>{isCompleted} de {finalValueLength}</span>
+          Concluídas
+          <span>
+            {isCompleted} de {taskValueLength}
+          </span>
         </p>
       </div>
 
-      {finalValueLength == 0 ? (
+      {taskValueLength == 0 ? (
         <div className={styles.hasNoValue}>
-          <img src={clipboardIcon} alt="" />
+          <img src={clipboardIcon} />
           <div>
-            <p>Você ainda não tem tarefas cadastradas</p>
+            <strong>Você ainda não tem tarefas cadastradas</strong>
             <p>Crie tarefas e organize seus itens a fazer</p>
           </div>
         </div>
       ) : (
         <ul>
-          {finalValue.map((value) => {
+          {taskValue.map((value) => {
             return (
               <li key={value.id}>
                 <div onClick={() => handleIsChecked(value.id)}>
                   <img src={value.isChecked ? checkedIcon : uncheckIcon} />
-                  <p className={value.isChecked ? styles.lineThrough:styles.noLineThrough}>{value.name}</p>
+                  <p
+                    className={
+                      value.isChecked
+                        ? styles.lineThrough
+                        : styles.noLineThrough
+                    }
+                  >
+                    {value.name}
+                  </p>
                 </div>
-                <div
+                <button
                   onClick={() => handleDeleteTask(value.id)}
                   className={styles.deleteIcon}
                 >
-                  <img src={deleteIcon} />
-                </div>
+                  <Trash color="#808080" size={24} />
+                </button>
               </li>
             );
           })}

@@ -1,7 +1,7 @@
 import styles from "./Input.module.css";
-import plus from "../../assets/plus.svg";
 import { useState, FormEvent, ChangeEvent } from "react";
 import { TodoList } from "../TodoList/TodoList";
+import { PlusCircle } from "phosphor-react";
 
 interface inputProps {
   name: string;
@@ -11,13 +11,13 @@ interface inputProps {
 
 export const InputForm = () => {
   const [inputValue, setInputValue] = useState("");
-  const [finalValue, setFinalValue] = useState<Array<inputProps>>([]);
+  const [taskValue, setTaskValue] = useState<Array<inputProps>>([]);
 
   const handleInputValue = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
-  const handleFinalValue = (event: FormEvent) => {
+  const handleAddTaskValue = (event: FormEvent) => {
     event.preventDefault();
     const randomId = Math.random();
 
@@ -25,13 +25,17 @@ export const InputForm = () => {
       return;
     }
 
-    setFinalValue([...finalValue, { name: inputValue, id: randomId, isChecked: false }]);
+    setTaskValue([
+      ...taskValue,
+      { name: inputValue, id: randomId, isChecked: false },
+    ]);
+
     setInputValue("");
   };
 
   return (
     <div className={styles.inputContainer}>
-      <form onSubmit={handleFinalValue} className={styles.inputContent}>
+      <form onSubmit={handleAddTaskValue} className={styles.inputContent}>
         <div>
           <input
             type="text"
@@ -42,11 +46,15 @@ export const InputForm = () => {
         </div>
         <div>
           <button type="submit">
-            Criar <img src={plus} alt="plus sign" />{" "}
+            Criar <PlusCircle size={18} />
           </button>
         </div>
       </form>
-      <TodoList setFinalValue={setFinalValue} finalValue={finalValue} finalValueLength={finalValue.length} />
+      <TodoList
+        setTaskValue={setTaskValue}
+        taskValue={taskValue}
+        taskValueLength={taskValue.length}
+      />
     </div>
   );
 };
