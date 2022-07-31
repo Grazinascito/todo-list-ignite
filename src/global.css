@@ -3,6 +3,7 @@
     --purple: #8284FA;
     --purple-dark: #5E60CE;
     --blue: #4EA8DE;
+    --bluedsds: #498db8;
     --blue-dark: #1E6F9F;
 
     /* base color */
@@ -30,3 +31,4 @@ body{
     font-size: 1.6rem;
     background-color: var(--gray-600);
 }
+

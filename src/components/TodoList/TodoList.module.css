@@ -1,0 +1,84 @@
+.listContent {
+  margin: 6.4rem auto;
+  width: 73.6rem;
+}
+
+.listContentStatus {
+  display: flex;
+  justify-content: space-between;
+}
+
+.listContentStatus p {
+  color: var(--blue);
+  margin-bottom: 2.4rem;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+.listContentStatus p:last-child {
+  color: #8284fa;
+}
+
+.listContentStatus p > span {
+  color: white;
+  background-color: var(--gray-400);
+  padding: 0.5rem 0.8rem;
+  border-radius: 50%;
+  font-size: 1.2rem;
+}
+
+.listContent li {
+  color: var(--gray-200);
+  background-color: var(--gray-400);
+  list-style-type: none;
+  padding: 1.5rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+li > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+.deleteIcon {
+  cursor: pointer;
+}
+.deleteIcon img {
+  width: 1.8rem;
+}
+
+
+li + li {
+  margin-top: 1.5rem;
+}
+
+.hasNoValue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-top: 1px solid var(--gray-400);
+  height: 28.7rem;
+  gap: 1.6rem;
+  line-height: 140%;
+}
+
+.hasNoValue p:first-child {
+  color: var(--gray-300);
+  font-weight: bold;
+}
+.hasNoValue p {
+  color: var(--gray-300);
+}
+
+.lineThrough{
+  opacity: .5;
+  text-decoration: line-through;
+}
+.noLineThrough{
+  opacity: 1;
+  text-decoration: none;
+}
