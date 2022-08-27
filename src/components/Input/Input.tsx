@@ -1,9 +1,10 @@
 import styles from "./Input.module.css";
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent, useReducer } from "react";
 import { TodoList } from "../TodoList/TodoList";
 import { PlusCircle } from "phosphor-react";
+import tasksReducer from "../../Reducers/TaskReducer";
 
-interface InputProps {
+export interface InputProps {
   name: string;
   id: number;
   isChecked: boolean;
@@ -11,7 +12,9 @@ interface InputProps {
 
 export const InputForm = () => {
   const [inputValue, setInputValue] = useState("");
-  const [taskValue, setTaskValue] = useState<Array<InputProps>>([]);
+  // const [taskValue, setTaskValue] = useState<Array<InputProps>>([]);
+  const initialTasks = [] as any;
+  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 
   const handleInputValue = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -20,19 +23,19 @@ export const InputForm = () => {
   const handleAddTaskValue = (event: FormEvent) => {
     event.preventDefault();
     const randomId = Math.random();
-
     if (!inputValue) {
       return;
     }
 
-    setTaskValue([
-      ...taskValue,
-      { name: inputValue, id: randomId, isChecked: false },
-    ]);
-
+    dispatch({
+      type: "added",
+      name: inputValue,
+      id: randomId,
+      boolean: false,
+    });
+    console.log(tasks);
     setInputValue("");
   };
-
   return (
     <div className={styles.inputContainer}>
       <form onSubmit={handleAddTaskValue} className={styles.inputContent}>
@@ -51,9 +54,11 @@ export const InputForm = () => {
         </div>
       </form>
       <TodoList
-        setTaskValue={setTaskValue}
-        taskValue={taskValue}
-        taskValueLength={taskValue.length}
+        // setTaskValue={setTaskValue}
+        taskValue={tasks}
+        taskValueLength={tasks.length}
+        dispatch={dispatch}
+        tasks={tasks}
       />
     </div>
   );
