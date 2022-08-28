@@ -12,8 +12,8 @@ export interface InputProps {
 
 export const InputForm = () => {
   const [inputValue, setInputValue] = useState("");
-  // const [taskValue, setTaskValue] = useState<Array<InputProps>>([]);
-  const initialTasks = [] as any;
+  
+  const initialTasks: Array<InputProps> = [];
   const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 
   const handleInputValue = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,14 +26,14 @@ export const InputForm = () => {
     if (!inputValue) {
       return;
     }
-
+    console.log(inputValue)
     dispatch({
       type: "added",
       name: inputValue,
       id: randomId,
       boolean: false,
     });
-    console.log(tasks);
+    
     setInputValue("");
   };
   return (
@@ -54,11 +54,9 @@ export const InputForm = () => {
         </div>
       </form>
       <TodoList
-        // setTaskValue={setTaskValue}
         taskValue={tasks}
         taskValueLength={tasks.length}
         dispatch={dispatch}
-        tasks={tasks}
       />
     </div>
   );

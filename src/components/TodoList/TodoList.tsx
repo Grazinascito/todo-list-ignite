@@ -5,6 +5,7 @@ import checkedIcon from "../../assets/checked.svg";
 import { useEffect, useReducer, useState } from "react";
 import { Trash } from "phosphor-react";
 import tasksReducer from "../../Reducers/TaskReducer";
+import { InputProps } from "../Input/Input";
 
 interface TodoListProps {
   taskValue: {
@@ -13,25 +14,20 @@ interface TodoListProps {
     isChecked: boolean;
   }[];
   taskValueLength: number;
-  setTaskValue?: Function;
   dispatch: any;
-  tasks: any;
 }
 
 export const TodoList = ({
   taskValue,
   taskValueLength,
-  setTaskValue,
   dispatch,
-  tasks,
 }: TodoListProps) => {
   const [isCompleted, setIsCompleted] = useState(0);
 
   const handleIsChecked = (id: number) => {
-    console.log(tasks.filter((task: any) => task.isChecked))
     dispatch({
       type: "check",
-      task: tasks,
+      task: taskValue,
       id: id,
     });
   };
@@ -51,13 +47,11 @@ export const TodoList = ({
   }, [taskValue]);
 
   const handleDeleteTask = (id: number) => {
-    const taskWithoutDeletedOne = taskValue.filter((task) => {
-      if (task.id !== id) {
-        return task;
-      }
+    dispatch({
+      type: "delete",
+      task: taskValue,
+      id: id,
     });
-
-    // setTaskValue(taskWithoutDeletedOne);
   };
 
   return (
